@@ -1,0 +1,41 @@
+{
+  "name": "yuncms/support",
+  "description": "The support module for yuncms.",
+  "keywords": [
+    "collection",
+    "yii2",
+    "yii2-module"
+  ],
+  "type": "yii2-extension",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Xu TL",
+      "email": "xutongle@gmail.com"
+    }
+  ],
+  "require": {
+    "yuncms/framework": "~1.0.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "yuncms\\support\\": "src"
+    }
+  },
+  "extra": {
+    "yuncms": "mainfest.php",
+    "branch-alias": {
+      "dev-master": "2.0.0-dev"
+    }
+  },
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "https://asset-packagist.org"
+    },
+    {
+      "type": "composer",
+      "url": "https://packagist.phpcomposer.com"
+    }
+  ]
+}
