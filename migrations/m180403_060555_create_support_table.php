@@ -26,12 +26,12 @@ class m180403_060555_create_support_table extends Migration
          * 赞表
          */
         $this->createTable($this->tableName, [
-            'id' => $this->primaryKey()->unsigned()->comment('ID'),
-            'user_id' => $this->integer()->unsigned()->notNull()->comment('User ID'),
-            'model_id' => $this->integer()->notNull()->comment('Model ID'),
+            'id' => $this->primaryKey()->comment('ID'),
+            'user_id' => $this->unsignedInteger()->notNull()->comment('User ID'),
+            'model_id' => $this->unsignedInteger()->notNull()->comment('Model ID'),
             'model_class' => $this->string(100)->notNull()->comment('Model Class'),
-            'created_at' => $this->integer()->unsigned()->notNull()->comment('Created At'),
-            'updated_at' => $this->integer()->unsigned()->notNull()->comment('Updated At'),
+            'created_at' => $this->unixTimestamp()->notNull()->comment('Created At'),
+            'updated_at' => $this->unixTimestamp()->notNull()->comment('Updated At'),
         ], $tableOptions);
 
         $this->addForeignKey('support_fk_1', $this->tableName, 'user_id', '{{%user}}', 'id', 'CASCADE', 'RESTRICT');
