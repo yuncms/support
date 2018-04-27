@@ -23,4 +23,6 @@ return [
     'Model ID' => '模型ID',
     'Updated At' => '更新时间',
     'User ID' => '用户ID',
+    'Support reminder' => '点赞提醒',
+    '{username} support your {entity}' => '{username} 赞了你的 {entity}',
 ];

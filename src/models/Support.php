@@ -4,6 +4,7 @@
  * @copyright Copyright (c) 2012 TintSoft Technology Co. Ltd.
  * @license http://www.tintsoft.com/license/
  */
+
 namespace yuncms\support\models;
 
 use Yii;
@@ -11,8 +12,8 @@ use yii\base\InvalidConfigException;
 use yii\behaviors\BlameableBehavior;
 use yii\behaviors\TimestampBehavior;
 use yuncms\db\ActiveRecord;
-use yuncms\notifications\contracts\NotificationInterface;
-use yuncms\notifications\NotificationTrait;
+use yuncms\support\notifications\SupportNotification;
+use yuncms\support\SupportInterface;
 use yuncms\user\models\User;
 
 /**
@@ -24,15 +25,13 @@ use yuncms\user\models\User;
  * @property string $model_class
  * @property integer $created_at
  * @property integer $updated_at
- * @property ActiveRecord $source
  *
  * @property User $user
+ * @property SupportInterface|ActiveRecord $source
  *
  */
-class Support extends ActiveRecord implements NotificationInterface
+class Support extends ActiveRecord
 {
-    use NotificationTrait;
-
     /**
      * @inheritdoc
      */
@@ -58,14 +57,13 @@ class Support extends ActiveRecord implements NotificationInterface
         ];
     }
 
-
     /**
      * @inheritdoc
      */
     public function rules()
     {
         return [
-            [[ 'model_id'], 'required'],
+            [['model_id'], 'required'],
             [['user_id', 'model_id'], 'integer'],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['user_id' => 'id']],
         ];
@@ -111,7 +109,13 @@ class Support extends ActiveRecord implements NotificationInterface
         if ($insert) {
             $this->source->updateCountersAsync(['supports' => 1]);
             try {
-                Yii::$app->notification->send($this->source->user, $this);
+                Yii::$app->notification->send($this->source->user, new SupportNotification([
+                    'data' => [
+                        'username' => $this->user->nickname,
+                        'entity' => $this->source->getTitle(),
+                        'source' => $this->source->toArray()
+                    ]
+                ]));
             } catch (InvalidConfigException $e) {
             }
         }
