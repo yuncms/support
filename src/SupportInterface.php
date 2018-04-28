@@ -10,6 +10,7 @@ namespace yuncms\support;
 /**
  * Interface SupportInterface
  * @property \yuncms\user\models\User $user
+ * @property integer supports
  * @package yuncms\support
  */
 interface SupportInterface
@@ -24,5 +25,11 @@ interface SupportInterface
      * @return \yuncms\user\models\User
      */
     public function getUser();
+
+    /**
+     * 更新点赞计数器
+     * @return void
+     */
+    public function updateSupportCounters();
 
 }
