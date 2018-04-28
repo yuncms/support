@@ -30,6 +30,5 @@ interface SupportInterface
      * 更新点赞计数器
      * @return void
      */
-    public function updateSupportCounters();
-
+    public function updateSupportCounter();
 }
