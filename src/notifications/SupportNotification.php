@@ -8,7 +8,6 @@
 namespace yuncms\support\notifications;
 
 use Yii;
-use yuncms\db\ActiveRecord;
 use yuncms\notifications\messages\CloudPushMessage;
 use yuncms\notifications\Notification;
 

@@ -13,7 +13,6 @@ use yii\behaviors\BlameableBehavior;
 use yii\behaviors\TimestampBehavior;
 use yuncms\db\ActiveRecord;
 use yuncms\support\notifications\SupportNotification;
-use yuncms\support\SupportInterface;
 use yuncms\user\models\User;
 
 /**
@@ -27,7 +26,7 @@ use yuncms\user\models\User;
  * @property integer $updated_at
  *
  * @property User $user
- * @property SupportInterface|ActiveRecord $source
+ * @property ActiveRecord $source
  *
  */
 class Support extends ActiveRecord
@@ -101,6 +100,15 @@ class Support extends ActiveRecord
     }
 
     /**
+     * 获取源标题
+     * @return string
+     */
+    public function getSourceTitle()
+    {
+        return null;
+    }
+
+    /**
      * @param bool $insert
      * @param array $changedAttributes
      */
@@ -112,7 +120,7 @@ class Support extends ActiveRecord
                 Yii::$app->notification->send($this->source->user, new SupportNotification([
                     'data' => [
                         'username' => $this->user->nickname,
-                        'entity' => $this->source->getTitle(),
+                        'entity' => $this->getSourceTitle(),
                         'source' => $this->source->toArray()
                     ]
                 ]));
