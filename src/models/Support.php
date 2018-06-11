@@ -121,7 +121,8 @@ class Support extends ActiveRecord
                     'data' => [
                         'username' => $this->user->nickname,
                         'entity' => $this->getSourceTitle(),
-                        'source' => $this->source->toArray()
+                        'source' => $this->source->toArray(),
+                        'entity_class' => self::class
                     ]
                 ]));
             } catch (InvalidConfigException $e) {
