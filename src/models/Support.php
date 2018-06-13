@@ -116,22 +116,30 @@ class Support extends ActiveRecord
     {
         if ($insert) {
             $this->source->updateCountersAsync(['supports' => 1]);
-            try {
-                Yii::$app->notification->send($this->source->user, new SupportNotification([
-                    'data' => [
-                        'username' => $this->user->nickname,
-                        'entity' => $this->getSourceTitle(),
-                        'entity_class' => self::class,
-                        'source' => $this->source->toArray(),
-                        'source_json' => $this->source->toJson(),
-                        'source_id' => $this->model_id,
-                        'source_class' => $this->model_class,
-                    ]
-                ]));
-            } catch (InvalidConfigException $e) {
-            }
+            $this->sendNotice();
         }
         parent::afterSave($insert, $changedAttributes);
+    }
+
+    /**
+     * 发送通知
+     */
+    public function sendNotice()
+    {
+        try {
+            Yii::$app->notification->send($this->source->user, new SupportNotification([
+                'data' => [
+                    'username' => $this->user->nickname,
+                    'entity' => $this->getSourceTitle(),
+                    'entity_class' => self::class,
+                    'source' => $this->source->toArray(),
+                    'source_json' => $this->source->toJson(),
+                    'source_id' => $this->model_id,
+                    'source_class' => $this->model_class,
+                ]
+            ]));
+        } catch (InvalidConfigException $e) {
+        }
     }
 
     /**
