@@ -37,7 +37,7 @@ class SupportNotification extends Notification
      */
     public function getTemplate()
     {
-        return Yii::t('yuncms/support', '{username} support your {entity}');
+        return Yii::t('yuncms/support', '{nickname} support your {entity}');
     }
 
     /**

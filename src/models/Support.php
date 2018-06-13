@@ -129,7 +129,7 @@ class Support extends ActiveRecord
         try {
             Yii::$app->notification->send($this->source->user, new SupportNotification([
                 'data' => [
-                    'username' => $this->user->nickname,
+                    'nickname' => $this->user->nickname,
                     'entity' => $this->getSourceTitle(),
                     'entity_class' => self::class,
                     'source' => $this->source->toArray(),
