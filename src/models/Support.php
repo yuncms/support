@@ -133,7 +133,6 @@ class Support extends ActiveRecord
                     'entity' => $this->getSourceTitle(),
                     'entity_class' => self::class,
                     'source' => $this->source->toArray(),
-                    'source_json' => $this->source->toJson(),
                     'source_id' => $this->model_id,
                     'source_class' => $this->model_class,
                 ]
