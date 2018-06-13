@@ -139,6 +139,7 @@ class Support extends ActiveRecord
                 ]
             ]));
         } catch (InvalidConfigException $e) {
+            Yii::error($e->getMessage(), __METHOD__);
         }
     }
 
